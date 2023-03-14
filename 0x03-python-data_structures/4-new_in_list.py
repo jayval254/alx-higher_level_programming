@@ -14,11 +14,6 @@ def new_in_list(my_list, idx, element):
     """
     if idx < 0 or idx > len(my_list):
         return my_list
-    else:
-        new_list = []
-        for i in my_list:
-            if my_list.index(i) == idx:
-                new_list.append(element)
-            else:
-                new_list.append(i)
-    return
+    new_list = my_list.copy()
+    new_list[idx] = element
+    return new_list
