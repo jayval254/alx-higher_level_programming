@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
     import sys
-    lst = sys.argv
-    lth = len(lst) - 1
-    arg = "argument"
-    print("{} argument{}{}".format(
-            lth,
-            "" if lth == 1 else "s",
-            "." if lth == 0 else ":"))
-    for i in range(1, len(lst)):
-        print("{}: {}".format(i, lst[i]))
+    argv = sys.argv
+    argc = len(argv)
+    if argc != 2:
+        print("{} arguments{}".format(argc - 1, ":" if argc > 1 else "."))
+    else:
+        print("1 argument:")
+    for i in range(1, argc):
+        print("{}: {}".format(i, argv[i]))
