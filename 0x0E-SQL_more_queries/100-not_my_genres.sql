@@ -14,4 +14,4 @@ WHERE genre.name NOT IN (
                 ON showgenre.show_id = show.id
     WHERE show.title = "Dexter"
 )
-ORDER BY genre.`name` ASC;
+ORDER BY genre.name ASC;
