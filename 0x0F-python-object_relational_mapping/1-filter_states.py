@@ -6,8 +6,8 @@ import MySQLdb
 import sys
 
 
-def select_states():
-    """list all states from database"""
+def filter_states():
+    """Lists states from database starting with N"""
 
     username = sys.argv[1]
     password = sys.argv[2]
@@ -20,7 +20,7 @@ def select_states():
                          db=database
                          )
     cur = db.cursor()
-    cur.execute('SELECT * FROM states ORDER BY id ASC')
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC")
     rows = cur.fetchall()
     for row in rows:
         print(row)
@@ -28,4 +28,4 @@ def select_states():
     db.close()
 
 if __name__ == "__main__":
-    select_states()
+    filter_states()
