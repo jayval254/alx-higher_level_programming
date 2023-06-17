@@ -1,31 +1,27 @@
 #!/usr/bin/python3
+""" lists all cities from the database
 """
-SelectStates module
-"""
-import MySQLdb
-import sys
+if __name__ == '__main__':
+    import MySQLdb
+    import sys
 
+    USERNAME = sys.argv[1]
+    PASSWORD = sys.argv[2]
+    DATABASE = sys.argv[3]
 
-def select_cities():
-    """Lists all cities in database"""
+    db = MySQLdb.connect(
+        host="localhost",
+        user=USERNAME,
+        passwd=PASSWORD,
+        db=DATABASE,
+        port=3306)
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-
-    db = MySQLdb.connect(host='localhost',
-                         port=3306,
-                         user=username,
-                         passwd=password,
-                         db=database
-                         )
     cur = db.cursor()
-    cur.execute("SELECT cities.id, cities.name, states.name FROM cities INNER JOIN states ON cities.state_id = states.id ORDER BY cities.id ASC")
+
+    cur.execute("SELECT cities.id, cities.name, states.name FROM cities, states WHERE states.id = state_id GROUP BY id")
     rows = cur.fetchall()
     for row in rows:
-        print(row)
+            print(row)
+
     cur.close()
     db.close()
-
-if __name__ == "__main__":
-    select_cities()
