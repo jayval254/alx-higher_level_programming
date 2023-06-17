@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" lists all cities from the database
+"""lists all cities from the database
 """
 if __name__ == '__main__':
     import MySQLdb
@@ -18,7 +18,11 @@ if __name__ == '__main__':
 
     cur = db.cursor()
 
-    cur.execute("SELECT cities.id, cities.name, states.name FROM cities, states WHERE states.id = state_id GROUP BY id")
+    cur.execute("SELECT cities.id, cities.name, states.name\
+                FROM cities\
+                INNER JOIN states\
+                ON cities.state_id = states.id\
+                ORDER BY cities.id ASC")
     rows = cur.fetchall()
     for row in rows:
             print(row)
