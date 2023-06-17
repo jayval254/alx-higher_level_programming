@@ -10,7 +10,7 @@ if __name__ == '__main__':
     USERNAME = sys.argv[1]
     PASSWORD = sys.argv[2]
     DATABASE = sys.argv[3]
-    ARG = sys.argv[4]
+    searched = sys.argv[4]
 
     db = MySQLdb.connect(
         host="localhost",
@@ -21,7 +21,9 @@ if __name__ == '__main__':
 
     cur = db.cursor()
 
-    cur.execute("SELECT * FROM states WHERE name='{}' COLLATE Latin1_General_CS ORDER BY id ASC".format(ARG))
+    cur.execute("SELECT * FROM states \
+                WHERE name LIKE BINARY '{}'\
+                ORDER BY id ASC".format(searched))
     rows = cur.fetchall()
     for row in rows:
         print(row)
