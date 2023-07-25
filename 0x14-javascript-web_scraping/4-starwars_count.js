@@ -9,13 +9,13 @@ request(host, function (err, res, body) {
     console.error(err);
     return;
   }
-  let occurence = 0;
+  let occ = 0;
   for (const film of JSON.parse(body).results) {
     for (const character of film.characters) {
       if (character.includes('18')) {
-        occurence = occurrence + 1;
+        occ = occ + 1;
       }
     }
   }
-  console.log(occurence);
+  console.log(occ);
 });
